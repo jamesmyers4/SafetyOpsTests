@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../ESAMSapp/ESAMSapp.csproj" />
+  <Project Path="EsamsTest.csproj" />
+</Solution>
