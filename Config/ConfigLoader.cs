@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace EsamsTests.Config;
+namespace SafetyOpsTests.Config;
 
 public static class ConfigLoader
 {

@@ -1,11 +1,11 @@
 ﻿using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
-using EsamsTests.Config;
-using EsamsTests.Pages;
-using EsamsTests.Helpers;
+using SafetyOpsTests.Config;
+using SafetyOpsTests.Pages;
+using SafetyOpsTests.Helpers;
 
-namespace EsamsTests.Tests;
+namespace SafetyOpsTests.Tests;
 
 [TestFixture]
 public class AddUserTests : PageTest

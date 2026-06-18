@@ -1,4 +1,4 @@
-﻿namespace EsamsTests.Helpers;
+﻿namespace SafetyOpsTests.Helpers;
 
 public class AdversarialName
 {

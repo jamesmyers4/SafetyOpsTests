@@ -1,7 +1,7 @@
 ﻿using Microsoft.Playwright;
-using EsamsTests.Config;
+using SafetyOpsTests.Config;
 
-namespace EsamsTests.Pages;
+namespace SafetyOpsTests.Pages;
 
 public static class LoginPage
 {
@@ -10,7 +10,7 @@ public static class LoginPage
         var baseUrl = settings.BaseUrl;
         var username = settings.LoginUsername;
         var password = settings.LoginPassword;
-        var mainUrl = settings.EsamsMainUrl;
+        var mainUrl = settings.SafetyOpsMainUrl;
 
         if (string.IsNullOrEmpty(baseUrl)) throw new Exception("BaseUrl is not set in appsettings.json");
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) throw new Exception("LoginUsername or LoginPassword is not set in appsettings.json");
@@ -19,10 +19,10 @@ public static class LoginPage
         await page.GotoAsync(baseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.Commit, Timeout = 60_000 });
 
         var loginSplash = page.Locator("button, a, input[type='submit']")
-            .Filter(new LocatorFilterOptions { HasText = System.Text.RegularExpressions.Regex.Match("", @"login to esams").ToString() });
+            .Filter(new LocatorFilterOptions { HasText = System.Text.RegularExpressions.Regex.Match("", @"login to safetyops").ToString() });
 
         var loginButton = page.Locator("button, a, input[type='submit']")
-            .Filter(new LocatorFilterOptions { HasTextRegex = new System.Text.RegularExpressions.Regex(@"login to esams", System.Text.RegularExpressions.RegexOptions.IgnoreCase) })
+            .Filter(new LocatorFilterOptions { HasTextRegex = new System.Text.RegularExpressions.Regex(@"login to safetyops", System.Text.RegularExpressions.RegexOptions.IgnoreCase) })
             .First;
 
         await loginButton.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible, Timeout = 60_000 });
@@ -42,16 +42,16 @@ public static class LoginPage
         try
         {
             await Task.WhenAll(
-                page.WaitForURLAsync(new System.Text.RegularExpressions.Regex(@"/n/esams/", System.Text.RegularExpressions.RegexOptions.IgnoreCase), new PageWaitForURLOptions { Timeout = 20_000 }),
+                page.WaitForURLAsync(new System.Text.RegularExpressions.Regex(@"/n/safetyops/", System.Text.RegularExpressions.RegexOptions.IgnoreCase), new PageWaitForURLOptions { Timeout = 20_000 }),
                 submitButton.ClickAsync()
             );
         }
         catch
         {
             await page.GotoAsync(mainUrl, new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded });
-            await page.WaitForURLAsync(new System.Text.RegularExpressions.Regex(@"/n/esams/", System.Text.RegularExpressions.RegexOptions.IgnoreCase), new PageWaitForURLOptions { Timeout = 20_000 });
+            await page.WaitForURLAsync(new System.Text.RegularExpressions.Regex(@"/n/safetyops/", System.Text.RegularExpressions.RegexOptions.IgnoreCase), new PageWaitForURLOptions { Timeout = 20_000 });
         }
 
-        await Assertions.Expect(page).ToHaveURLAsync(new System.Text.RegularExpressions.Regex(@"/n/esams/", System.Text.RegularExpressions.RegexOptions.IgnoreCase));
+        await Assertions.Expect(page).ToHaveURLAsync(new System.Text.RegularExpressions.Regex(@"/n/safetyops/", System.Text.RegularExpressions.RegexOptions.IgnoreCase));
     }
 }
